@@ -18,6 +18,9 @@ class Solution:
             if target > 0:            
                 target -= v
                 counter += 1
+
+            else:
+                break
                 
         return counter
             
