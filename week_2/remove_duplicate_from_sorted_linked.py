@@ -12,16 +12,9 @@ class Solution:
         while current:
             if current.next and current.val == current.next.val:
                 current.next = current.next.next
-            else:            
+            else:
                 current = current.next
         return head
-
-        
-
-
-
-
-
 
 if __name__ == "__main__":
     l2 = ListNode()
@@ -29,11 +22,9 @@ if __name__ == "__main__":
     l2.next.next = ListNode(6)
     l2.next.next.next = ListNode(6)
 
-    
     s = Solution()
     cleand = s.deleteDuplicates(l2)
 
     while cleand:
         print(cleand.val)
         cleand = cleand.next
-
