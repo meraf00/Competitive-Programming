@@ -8,4 +8,4 @@ class Solution:
         
     def largestNumber(self, nums: List[int]) -> str:
         nums.sort(key=ConcatCompare)
-        return "".join(map(str, nums))
+        return str(int("".join(map(str, nums))))
