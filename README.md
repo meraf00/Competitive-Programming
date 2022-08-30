@@ -1,3 +1,3 @@
 # A2SV Competitive-Programming
 
-Solutions for programming problems on A2SV Community page
+Solutions for programming questions on A2SV Community page
