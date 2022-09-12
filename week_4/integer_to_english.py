@@ -8,8 +8,8 @@ class Solution:
     
     def name3dig(self, num: int, offset: int = 0) -> str:
         digX = ["Zero", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine"]
-        dig1x = ["Ten", "Eleven", "Twelve", "Thirteen", "Fourteen", "Fifteen", "Sixteen", "Seventeen", "Eighteen", "Nineteen"]
-        dig2x = ["Twenty", "Thirty", "Forty", "Fifty", "Sixty", "Seventy", "Eighty", "Ninety"]
+        dig1X = ["Ten", "Eleven", "Twelve", "Thirteen", "Fourteen", "Fifteen", "Sixteen", "Seventeen", "Eighteen", "Nineteen"]
+        digXX = ["Twenty", "Thirty", "Forty", "Fifty", "Sixty", "Seventy", "Eighty", "Ninety"]
         
         postfixes = ["", "Thousand", "Million", "Billion"]
         
@@ -25,12 +25,12 @@ class Solution:
         
         elif digits == 2:                        
             if str(num)[0] == "1":
-                output = "%s" % dig1x[num % 10]
+                output = "%s" % dig1X[num % 10]
             
             elif str(num)[1] == "0":                
-                output = "%s" % dig2x[int(str(num)[0]) - 2]
+                output = "%s" % digXX[int(str(num)[0]) - 2]
             else:
-                output = "%s %s" % (dig2x[int(str(num)[0]) - 2], digX[num % 10])
+                output = "%s %s" % (digXX[int(str(num)[0]) - 2], digX[num % 10])
         
         elif digits == 3:            
             output = "%s Hundred" % digX[int(str(num)[0])]
@@ -42,12 +42,12 @@ class Solution:
                 output += " %s" % digX[num % 10]
                 
             elif str(num)[1] == "1":
-                output += " %s" % dig1x[num % 10]
+                output += " %s" % dig1X[num % 10]
             
             elif str(num)[2] == "0":                
-                output += " %s" % dig2x[int(str(num)[1]) - 2]
+                output += " %s" % digXX[int(str(num)[1]) - 2]
             else:
-                output += " %s %s" % (dig2x[int(str(num)[1]) - 2], digX[num % 10])
+                output += " %s %s" % (digXX[int(str(num)[1]) - 2], digX[num % 10])
             
         if postfix and output:
             return output + " " + postfix
