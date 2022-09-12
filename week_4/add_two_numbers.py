@@ -54,9 +54,8 @@ class Solution:
             current.val += partial_addition % 10 
             l2 = l2.next                                        
         
-        while carry:
+        if carry:
             current.next = ListNode(carry)
-            current = current.next
-            carry = carry // 10 
+            current = current.next            
             
         return result
