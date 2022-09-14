@@ -1,5 +1,5 @@
 """
-https://leetcode.com/problems/top-k-frequent-words/
+https://leetcode.com/problems/top-k-frequent-elements/
 """
 
 from typing import List
