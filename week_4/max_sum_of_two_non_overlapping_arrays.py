@@ -13,7 +13,7 @@ class Solution:
         ll = rl = 0         # left window
         lm = rm = 0         # mid window        
         
-        sum_l = sum_m = sum_r = 0
+        sum_l = sum_m = 0
         while rm < len(nums):
             sum_m += nums[rm]
             
