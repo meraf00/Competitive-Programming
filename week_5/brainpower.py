@@ -18,6 +18,7 @@ class Solution:
             cummulative_points[i] += pts
                         
             if i + 1 < len(questions):
+                # max between doing and not doing quesition
                 cummulative_points[i] = max(cummulative_points[i+1], cummulative_points[i]) 
                 
         return max(cummulative_points)
