@@ -28,7 +28,7 @@ class Solution:
             
             # found new large jump 
             elif heap and jump > heap[0]:
-                # so transfer old jump from ladder to brick and add new jump to ladder
+                # so transfer old smaller jump from ladder to brick and add new jump to ladder
                 if passed_by_brick + heap[0] <= bricks:
                     passed_by_brick += heapq.heappop(heap)                                
                     heapq.heappush(heap, jump)
