@@ -33,7 +33,7 @@ class Solution:
         
         return max_size
 
-    # TLE
+    # TLE O(n^3) *~*
     def _longestSubarray(self, nums: List[int], limit: int) -> int:
         left = right = 0
         min_ = max_ = nums[0]
