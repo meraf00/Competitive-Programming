@@ -28,12 +28,12 @@ class Solution:
             
             # found new large jump 
             elif heap and jump > heap[0]:
-                # so transfer old smaller jump from ladder to brick and add new jump to ladder
+                # transfer old smaller jump from ladder to brick and add new larger jump to ladder
                 if passed_by_brick + heap[0] <= bricks:
                     passed_by_brick += heapq.heappop(heap)                                
                     heapq.heappush(heap, jump)
                 
-                # transfer is not possible b/c we don't have enough brick, also ladder
+                # transfer is not possible b/c we don't have enough brick, also we have used all ladders
                 else:
                     break
             
