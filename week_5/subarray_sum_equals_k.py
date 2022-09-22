@@ -28,7 +28,7 @@ class Solution:
         return total
     
     
-    # my idea TLE
+    # TLE
     def _subarraySum(self, nums: List[int], k: int) -> int:
         cummulative = 0
         for i in range(len(nums)):
