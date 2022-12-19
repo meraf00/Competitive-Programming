@@ -1,3 +1,5 @@
+"""https://www.hackerrank.com/challenges/no-idea/problem?isFullScreen=true"""
+
 # Enter your code here. Read input from STDIN. Print output to STDOUT
 
 size_a, size_b = list(map(int, input().split(" ")))
@@ -15,4 +17,3 @@ for element in array:
         happiness -= 1
 
 print(happiness)
-        
