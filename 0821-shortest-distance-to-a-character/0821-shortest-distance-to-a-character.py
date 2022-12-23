@@ -7,10 +7,12 @@ class Solution:
             if char == c:
                 e_indices.append(idx)
         
-        output = [0] * string_length
+        
+        # pointers on e_indices
         left = -1
         right = 0
         
+        output = [0] * string_length
         for char_idx, char in enumerate(s):            
             if char_idx >= e_indices[right]:
                 left = min(len(e_indices) - 1, left + 1)
