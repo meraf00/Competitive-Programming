@@ -11,8 +11,8 @@ class Solution:
             
             for index, char in enumerate(domain):
                 if char == ".":
-                    domain_substring = domain[index + 1:]
-                    domain_visit_count[domain_substring] += count
+                    parent_domain = domain[index + 1:]
+                    domain_visit_count[parent_domain] += count
         
         output = []
         for domain, visit_count in domain_visit_count.items():            
