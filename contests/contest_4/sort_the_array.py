@@ -1,10 +1,12 @@
 import sys
 
+
 def reverse_segment(array, left, right):
     while left < right:
         array[left], array[right] = array[right], array[left]
         left += 1
         right -= 1
+
 
 def is_sorted(array):
     for i in range(len(array) - 1):
@@ -12,30 +14,31 @@ def is_sorted(array):
             return False
     return True
 
+
 array_size = int(input())
 
 array = list(map(int, input().split()))
+sorted_array = sorted(array)
 
-left = 0
-right = 1
-increasing_range = []
-while right < len(array):    
-    if array[right] >= array[right - 1]:
-        right +=1
-    
-    else:        
-        increasing_range.append((left, right-1))
-        left = right        
-        right += 1
+front = 0
+back = array_size - 1
 
-increasing_range.append((left, right-1))
-if len(increasing_range) == 0:
+while front < array_size and array[front] == sorted_array[front]:
+    front += 1
+
+while back > -1 and array[back] == sorted_array[back]:
+    back -= 1
+
+if front >= back:
     print("yes")
-    print(left+1, right)
+    print(1, 1)
     sys.exit()
-print(increasing_range)
-for index in range(len(increasing_range) - 1):
-    pass
 
+reverse_segment(array, front, back)
 
+if is_sorted(array):
+    print("yes")
+    print(front + 1, back + 1)  # codeforce is one indexed
+    sys.exit()
 
+print("no")
