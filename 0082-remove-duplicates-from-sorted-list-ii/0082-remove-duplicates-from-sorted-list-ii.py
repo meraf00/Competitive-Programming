@@ -11,15 +11,17 @@ class Solution:
         prev = dummy
         curr  = head
         
+        last_seen = prev.val
         while curr:
-            while prev.val == curr.val:
-                curr = curr.next
-                if not curr:
-                    prev.next = curr
-                    return dummy.next
+            if curr.val == last_seen or (curr.next and curr.val == curr.next.val):
+                if curr.next and curr.val == curr.next.val:
+                    last_seen = curr.val                                        
+                prev.next = curr.next
+            else:
+                last_seen = curr.val  
+                prev =  curr
             
-            prev.next = curr
-            prev = curr                        
             curr = curr.next
+        
         
         return dummy.next
