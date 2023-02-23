@@ -1,11 +1,9 @@
 class NumArray:
 
-    def __init__(self, nums: List[int]):
-        print(nums)
+    def __init__(self, nums: List[int]):        
         for i in range(1, len(nums)):
             nums[i] += nums[i-1]
-        self.nums = nums
-        print(nums)
+        self.nums = nums        
             
 
     def sumRange(self, left: int, right: int) -> int:
