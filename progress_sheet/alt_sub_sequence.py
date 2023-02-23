@@ -1,3 +1,5 @@
+# https://codeforces.com/contest/1343/problem/C
+
 def max_subsequence(array):
     array_size = len(array)
     left = 0
