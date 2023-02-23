@@ -4,7 +4,7 @@ n, k = map(int, input().split())
 array = list(map(int, input().split()))
 
 
-def check(array, k):        
+def check(array, k):
     array.sort()
     if len(array) == k:
         return array[-1]
@@ -13,7 +13,7 @@ def check(array, k):
         if array[0] == 1:
             return -1
         else:
-            return 1 
+            return 1
 
     for i in range(len(array) - 1):
         if array[i] != array[i+1]:
