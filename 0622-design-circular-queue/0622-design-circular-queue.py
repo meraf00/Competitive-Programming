@@ -16,7 +16,7 @@ class MyCircularQueue:
         self.queue[self.back] = value     
         self.back = (self.back + 1) % self.size        
         self.element_count += 1
-        print(self.queue, self.front, self.back)
+        
         return True
     
 
