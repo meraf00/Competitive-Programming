@@ -3,19 +3,13 @@ class Solution:
         stack = []
         greater_map = {}
                 
-        for i, num in enumerate(nums2):
-            while stack and nums2[stack[-1]] < num:
-                index = stack.pop()
-                number = nums2[index]
+        for num in nums2:
+            while stack and stack[-1] < num:                
+                number = stack.pop()
                 greater_map[number] = num
         
-            stack.append(i)
+            stack.append(num)
         
-        answer = []
-        for num in nums1:
-            greater = greater_map.get(num, -1)
-            answer.append(greater)
+        return map(lambda num: greater_map.get(num, -1), nums1)
         
-        return answer
-            
         
