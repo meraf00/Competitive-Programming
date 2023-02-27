@@ -1,55 +1,57 @@
-import heapq
-
 n_foods, n_customers = map(int, input().split())
 
 foods = list(map(int, input().split()))
 prices = list(map(int, input().split()))
 
-prices_heap = [(p, i) for i, p in enumerate(prices)]
-heapq.heapify(prices_heap)
+cheapest_prices = [(p, i) for i, p in enumerate(prices)]
+cheapest_prices.sort()
+cheapest_food_idx = 0
 
-total_food = sum(foods)
 ans = []
 for _ in range(n_customers):
-    food_idx, quantity = map(int, input().split())
+    current_price = 0
 
-    if total_food == 0 or total_food < quantity:
-        ans.append(0)
-        continue    
+    ordered_food_idx, order_quantity = map(int, input().split())
+    ordered_food_idx -= 1
+
+    available_quantity = foods[ordered_food_idx]
+
+    if available_quantity >= order_quantity:
+        current_price += prices[ordered_food_idx] * order_quantity
+        foods[ordered_food_idx] -= order_quantity
     
-    elif quantity >= foods[food_idx - 1]: 
-        cur_price = 0
-        index = food_idx - 1
-        if foods[index] != 0:
-            quantity -= foods[index]
-            total_food -= foods[index]
-            cur_price += foods[index] * prices[index]
-            foods[index] = 0
-
-        while quantity > 0:
-            price, index = heapq.heappop(prices_heap) 
-
-            ava = foods[index]
-        
-            if ava > quantity:            
-                foods[index] -= quantity
-                total_food -= quantity
-                cur_price += price * quantity                
-                quantity = 0
-                heapq.heappush(prices_heap, (price, index)) 
-
-            else:
-                cur_price += price * foods[index]
-                quantity -= foods[index] 
-                total_food -= foods[index] 
-                foods[index] = 0        
-
-        ans.append(cur_price)
-
     else:
-        foods[food_idx - 1] -= quantity
-        ans.append(quantity * prices[food_idx - 1])
+        current_price += prices[ordered_food_idx] * available_quantity
+        foods[ordered_food_idx] = 0
+
+    orders_left = max(0, order_quantity - available_quantity)
+
+    while orders_left > 0:
+        # find cheapest   
+        cheapest_food = None
+        while cheapest_food_idx < len(cheapest_prices) and cheapest_food == None:            
+            cheapest_price, cheapest_food = cheapest_prices[cheapest_food_idx]
+            if foods[cheapest_food] == 0:
+                cheapest_food = None                        
+                cheapest_food_idx += 1
+            else:
+                break
+        
+        if cheapest_food == None:
+            current_price = 0
+            break
+        
+        else:            
+            cheapest_available_quantity = foods[cheapest_food]   
+            if cheapest_available_quantity >= orders_left:         
+                current_price += cheapest_price * orders_left
+            else:
+                current_price += cheapest_price * cheapest_available_quantity
+            
+            foods[cheapest_food] = max(0, cheapest_available_quantity - orders_left)
+            orders_left -= cheapest_available_quantity
     
-        total_food -= quantity
+    ans.append(current_price)
+
 
 print("\n".join(map(str, ans)))
