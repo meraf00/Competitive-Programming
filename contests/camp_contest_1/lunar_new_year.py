@@ -1,3 +1,5 @@
+# https://codeforces.com/gym/429319/problem/E
+
 n_foods, n_customers = map(int, input().split())
 
 foods = list(map(int, input().split()))
