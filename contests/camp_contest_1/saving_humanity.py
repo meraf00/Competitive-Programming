@@ -1,43 +1,31 @@
 test_cases = int(input())
 
 
-def revive(humans):
-    new = [humans[0]]
+def revive(soldiers, iters):
+    length = len(soldiers)
+    
+    soldiers.append(0)
 
-    if humans[0] == "0" and humans[1] == "1":
-        new[0] = "1"
+    for j in range(iters):
+        new = [s for s in soldiers]
+        for i in range(length):        
+            if soldiers[i-1] == 1 and soldiers[i+1] == 1:
+                continue
+            
+            if soldiers[i-1] == 1 or soldiers[i+1] == 1:
+                new[i] = 1                                      
+        
+        if new == soldiers:
+            break
+        soldiers = new
 
-    humans.append("0")
-    for i in range(1, len(humans) - 1):
-
-        if humans[i] != "0":
-            new.append(humans[i])
-            continue
-
-        prev = humans[i-1]
-        next = humans[i+1]
-
-        if prev != next and (prev == "1" or next == "1"):
-            new.append("1")
-        else:
-            new.append("0")
-
-    return new
-
-
-def process(humans, iter):
-    if len(humans) <= 1:
-        return "".join(humans)
-
-    for _ in range(iter):
-        humans = revive(humans)
-
-    return "".join(humans)
+    return "".join(map(str, soldiers[:-1]))
 
 
 for _ in range(test_cases):
-    size, iter = list(map(int, input().split()))
+    n_soldiers, iters = map(int, input().split())
+    soldiers = list(map(int, input()))
 
-    humans = list(input())
+    print(revive(soldiers, iters))
 
-    print(process(humans, iter))
+
