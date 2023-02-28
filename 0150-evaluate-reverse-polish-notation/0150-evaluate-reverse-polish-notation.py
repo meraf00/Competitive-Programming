@@ -12,8 +12,8 @@ class Solution:
         for token in tokens:
             
             if token in ops:                
-                b = int(stack.pop())
-                a = int(stack.pop())
+                b = stack.pop()
+                a = stack.pop()
                 
                 operation = ops[token]
                 
