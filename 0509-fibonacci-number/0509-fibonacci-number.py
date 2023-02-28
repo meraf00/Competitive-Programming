@@ -6,10 +6,10 @@ class Solution:
             return self.computed[n]
         
         num_1 = self.fib(n - 1)
-        self.computed[n - 1] = num_1
+        # self.computed[n - 1] = num_1
         
         num_2 = self.fib(n - 2)
-        self.computed[n - 2] = num_2
+        # self.computed[n - 2] = num_2
         
         self.computed[n] = num_1 + num_2
         
