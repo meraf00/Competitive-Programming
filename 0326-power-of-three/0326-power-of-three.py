@@ -3,7 +3,7 @@ class Solution:
         if n == 1:
             return True
         
-        if n < 3:
+        elif n < 3 or n % 3 != 0:
             return False
         
         return self.isPowerOfThree(n / 3)
