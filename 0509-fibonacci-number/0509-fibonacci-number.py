@@ -1,8 +1,6 @@
-class Solution:
-    computed = {0:0, 1:1}
-    
-    def fib(self, n: int) -> int:
-        computed = self.computed
+class Solution:        
+    def fib(self, n: int, computed = {0:0, 1:1}) -> int:
+        # computed = self.computed
         
         if n in computed:
             return computed[n]
