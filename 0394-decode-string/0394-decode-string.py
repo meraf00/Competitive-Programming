@@ -54,7 +54,7 @@ class Solution:
                 # how many times to repeat the string is specified before opening bracket
                 count = int(tokens[start - 1])
                 
-                # repeat the enclosed string count times and put it in stack
+                # repeat the enclosed string count times and update the token
                 encoded = "".join(tokens[start + 1 : end]) 
                 
                 new_tokens = tokens[:start-1] + [encoded * count] + tokens[end + 1:]  
