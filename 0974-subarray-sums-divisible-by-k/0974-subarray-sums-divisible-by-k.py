@@ -14,7 +14,7 @@ class Solution:
             if remainder == 0:
                 subarrays += 1
             
-            subarrays += counter[current_sum % k]
+            subarrays += counter[remainder]
             
             counter[remainder] += 1                        
         
