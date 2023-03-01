@@ -1,23 +1,38 @@
 class Solution:
-    evaluated = {1: ["0"]}            
+    evaluated = {0: "0", 1:"1", 2:"1"}
+    
+    def isPowerOf2(self, k):
+        return (k & (k - 1)) == 0
+    
+    def find(self, n, k):
         
-    def buildString(self, n):
-        if n in self.evaluated:
-            return self.evaluated[n]                
+        if k in self.evaluated:
+            return self.evaluated[k]
         
-        string = list(self.buildString(n - 1))
+        # if 2**n - 1 - k in self.evaluated:
+        #     self.evaluated[k] = "0" if self.evaluated[2**n - 1 - k] == "1" else "1"
+        #     return self.evaluated[k]
         
-        second_part = reversed(["1" if char == "0" else "0" for char in string ])
+        if self.isPowerOf2(k + 1):            
+            self.evaluated[k] = "1"
+            return self.evaluated[k]
+                
         
-        string.append("1")
+        first_set_bit = k.bit_length() - 1        
         
-        string.extend(second_part)                
+        mirror = 2 ** first_set_bit - 1                
         
-        self.evaluated[n] = string
+        result = self.find(n, 2 * mirror - k)
         
-        return string
+        self.evaluated[2 * mirror - k] = result
         
+        self.evaluated[k] = "0" if result == "1" else "1"                
         
+        return self.evaluated[k]
+            
     def findKthBit(self, n: int, k: int) -> str:
         
-        return self.buildString(n)[k - 1]
+        return self.find(n, k - 1)
+        
+        
+        
