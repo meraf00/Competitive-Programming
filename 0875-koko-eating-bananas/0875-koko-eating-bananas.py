@@ -19,19 +19,12 @@ class Solution:
         low = sum(piles) // h
                 
         while low <= high:
-            mid = low + (high - low) // 2
-            # print(high, low, mid)
+            mid = low + (high - low) // 2            
             
             if self.time_required(mid, piles) <= h:                
                 high = mid - 1
                 
             else:
                 low = mid + 1                     
-            
-            # print(locals())
-            # print()
-                        
-        # if self.time_required(high - 1, piles) <= h:
-        #     return high - 1
-        
+
         return low
