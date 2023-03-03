@@ -3,28 +3,21 @@ class Solution:
         low = 0
         high = x
         
-        def binarySearch(low, high):
-            if low >= high:
-                return high
-            
-            mid = low + (high - low) // 2
+        while low <= high:            
+            mid = (low + high) // 2
             
             result = mid * mid
-
-            if result > x:
-                return binarySearch(low, mid - 1)
             
-            elif result < x:
-                return binarySearch(mid + 1, high)
+            if result < x:
+                low = mid + 1
+            
+            elif result > x:
+                high = mid - 1
             
             else:
                 return mid
         
-        sqrt = binarySearch(low, high)
+        if result > x:
+            return mid - 1
         
-        if sqrt * sqrt > x:
-            return sqrt - 1
-        
-        return sqrt
-        
-            
+        return mid
