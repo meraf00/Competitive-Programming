@@ -10,9 +10,7 @@ class Solution:
         if p.val > q.val:
             p, q = q, p
         
-        current = root
-        
-        common_parent = None
+        current = root                
         
         while current:
             
@@ -23,16 +21,12 @@ class Solution:
                 current = current.right
             
             elif current.val > p.val:                
-                
+                # common parent
                 if current.val <= q.val:
-                    if not common_parent:
-                        common_parent = current                    
+                    return current                        
                 
                 current = current.left 
-        
-        if common_parent:            
-            return common_parent
-        
+               
         current = root
         
         while current:
@@ -42,12 +36,10 @@ class Solution:
             
             elif current.val < q.val:
                 if current.val >= p.val:
-                    if not common_parent:
-                        common_parent = current
+                    return current
                     
                 current = current.right
            
             elif current.val > q.val:
                 current = current.left 
                 
-        return common_parent
