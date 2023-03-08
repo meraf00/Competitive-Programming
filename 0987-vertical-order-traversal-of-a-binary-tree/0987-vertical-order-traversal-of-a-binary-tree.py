@@ -6,38 +6,38 @@
 #         self.right = right
 class Solution:
     def verticalTraversal(self, root: Optional[TreeNode]) -> List[List[int]]:
-        dic = defaultdict(list)
+        
+        traversal = defaultdict(list)
+                        
+        
+        stack = [(root, 0, 0)]
         
         min_col = float('inf')
         max_col = float('-inf')
         
-        def dfs(root, col, row):
-            nonlocal min_col, max_col
+        while stack:
+            node, row, col = stack.pop()
             
-            if not root:
-                return 
+            traversal[col].append((row, node.val))
             
-            dic[col].append((row, root.val))
+            if node.right:
+                stack.append((node.right, row + 1, col + 1))
             
-            min_col = min(col, min_col)
+            if node.left:
+                stack.append((node.left, row + 1, col - 1))
+            
             max_col = max(col, max_col)
-            
-            dfs(root.left, col - 1, row + 1)
-            dfs(root.right, col + 1, row + 1)
-        
-        dfs(root, 0, 0)
-        
+            min_col = min(col, min_col)
+                        
         
         output = []
         for i in range(min_col, max_col + 1):
-            dic[i].sort()
-            
-            output.append(list(map(lambda x: x[1],  dic[i])))
-            
-    
-        
+            traversal[i].sort()            
+            output.append(list(map(lambda x: x[1],  traversal[i])))
+                        
         return output
                 
-                
-                
-                
+    
+    
+    
+    
