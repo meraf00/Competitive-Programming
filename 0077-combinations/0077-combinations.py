@@ -1,7 +1,7 @@
 class Solution:  
     def __init__(self):
         self.solutions = []
-        self.k = None        
+       
     
     def backtrack(self, path, start, level, n):
         if level == 0:
@@ -14,7 +14,6 @@ class Solution:
     
   
     def combine(self, n: int, k: int) -> List[List[int]]:
-        self.k = k
         
         self.backtrack([], 1, k, n)
                 
