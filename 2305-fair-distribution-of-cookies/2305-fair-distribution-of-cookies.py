@@ -2,27 +2,32 @@ class Solution:
     def distributeCookies(self, cookies: List[int], k: int) -> int:
         min_unfairness = float('inf')
         
-        def backtrack(distribution, cookie_index):
+        distribution = [0] * k
+        
+        def backtrack(cookie_index):
             nonlocal min_unfairness
             
             if cookie_index >= len(cookies):
                 unfairness = max(distribution)
+                
                 min_unfairness = min(unfairness, min_unfairness)
                 
                 return
             
             
             for i in range(k):
-                distribution_copy = distribution[:]
                 
-                distribution_copy[i] += cookies[cookie_index]
+                distribution[i] += cookies[cookie_index]
                 
-                if distribution_copy[i] >= min_unfairness:
+                if distribution[i] >= min_unfairness:
+                    distribution[i] -= cookies[cookie_index]
                     continue
                 
-                backtrack(distribution_copy, cookie_index + 1)
+                backtrack(cookie_index + 1)
+                
+                distribution[i] -= cookies[cookie_index]
             
             
-        backtrack([0] * k, 0)
+        backtrack(0)
         
         return min_unfairness
