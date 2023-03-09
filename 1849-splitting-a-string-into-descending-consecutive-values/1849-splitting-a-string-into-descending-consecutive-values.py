@@ -1,37 +1,40 @@
-class Solution:
-    def splitString(self, s: str) -> bool:
-        flag = False
-        
-        def backtrack(built_, s_):
-            nonlocal flag
-           
-            if len(s_) == 0 and len(built_) > 1:
-                flag = True
-            
-            if flag:                
-                return
-            
-            # print(">", built_, s_)
 
-            for i in range(len(s_)):
-                built = built_[:]         
-                
-                if built:                    
-                    if built[-1] - int(s_[:i + 1]) == 1:
-                        built.append(int(s_[:i + 1]))
-                    
-                    else:
-                        continue
-                    
-                        
-                else:
-                    
-                    built.append(int(s_[ : i+1]))
-                                
-                backtrack(built, s_[i + 1:])                                            
-                
+class Solution:
+    def __init__(self):
+        self.flag = False
+    
+    
+    def backtrack(self, splitted, string):
+        if len(string) == 0 and len(splitted) > 1:
+            self.flag = True
+        
+        
+        if self.flag:
+            return
+        
+        
+        for index in range(len(string)):
+            new_splitted = splitted[:]
             
+            
+            next_num = int(string[:index + 1])
+            
+            if new_splitted:
+                if new_splitted[-1] - next_num == 1:
+                    new_splitted.append(next_num)
+                
+                else:
+                    continue
+                        
+            else:
+                new_splitted.append(next_num)
+            
+            
+            self.backtrack(new_splitted, string[index + 1:])
+       
+    
+    def splitString(self, s: str) -> bool:
         
-        backtrack([], s)
+        self.backtrack([], s)
         
-        return flag
+        return self.flag
