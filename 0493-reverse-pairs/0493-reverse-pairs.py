@@ -33,7 +33,7 @@ class Solution:
 
                 else:     
                     
-                    while pointer < len(arr_1) and arr_1[pointer] <= 2 * arr_2[p2]:
+                    while pointer < l1 and arr_1[pointer] <= 2 * arr_2[p2]:
                         pointer += 1
                                         
                     counter += len(arr_1) - pointer
@@ -46,12 +46,13 @@ class Solution:
             
             
             for num in arr_2[p2:]:
-                while pointer < len(arr_1) and arr_1[pointer] <= 2 * arr_2[p2]:
-                        pointer += 1
+                while pointer < l1 and arr_1[pointer] <= 2 * arr_2[p2]:
+                    pointer += 1
                                         
-                counter += len(arr_1) - pointer
+                counter += l1 - pointer
 
                 merged.append(arr_2[p2])
+                
                 p2 += 1
 
             return merged
