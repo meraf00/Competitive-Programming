@@ -1,3 +1,5 @@
+# https://codeforces.com/gym/430380/problem/E
+
 n, k = map(int, input().split())
 
 ratings = list(map(int, input().split()))
