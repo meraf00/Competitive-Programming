@@ -3,30 +3,30 @@ class Solution:
         
         count = 0
                 
-        seen = set()        
+        seen = 0           
         
-        def backtrack():
-            nonlocal count
+        def backtrack(current_length):
+            nonlocal count, seen
             
-            if len(seen) == n:
+            if current_length == n:
                 count += 1
                 return
             
             for num in range(1, n + 1):
-                if num in seen:
+                if 1 << num & seen:
                     continue
                     
-                if num % (len(seen) + 1) != 0 and (len(seen) + 1) % num != 0:
+                if num % (current_length + 1) != 0 and (current_length + 1) % num != 0:
                     continue
                     
                 
-                seen.add(num)
+                seen ^= 1 << num
                 
-                backtrack()
+                backtrack(current_length + 1)
                                 
-                seen.discard(num)
+                seen ^= 1 << num
         
         
-        backtrack()
+        backtrack(0)
         
         return count
