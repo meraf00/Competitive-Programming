@@ -1,4 +1,4 @@
-# https://www.eolymp.com/en/contests/9060/problems/78605
+# https://www.eolymp.com/en/contests/9060/problems/78603
 
 from collections import defaultdict
 
