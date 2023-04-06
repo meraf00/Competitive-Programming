@@ -1,3 +1,5 @@
+# https://codeforces.com/problemset/problem/1810/C
+
 def make_permutation_cost(nums, del_cost, ins_cost):
     total_cost = 0
 
