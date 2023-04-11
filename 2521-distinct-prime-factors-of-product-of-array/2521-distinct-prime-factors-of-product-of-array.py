@@ -1,21 +1,10 @@
-class Solution:
-    def seive(self, n):        
-        primes = [1] * n
-        primes[0] = primes[1] = 0
-        
-        for i in range(int(sqrt(n)) + 1):
-            if not primes[i]:
-                continue
-            
-            j = i
-            while j <= n:
-                primes[j] = 0
-                j += i            
-    
+class Solution:              
     def distinctPrimeFactors(self, nums: List[int]) -> int:
         factors = set()
         
-        for n in nums:                        
+        for n in nums:
+            current_factors = set()
+            
             i = 2
             while i <= n:
                 while n % i == 0:
