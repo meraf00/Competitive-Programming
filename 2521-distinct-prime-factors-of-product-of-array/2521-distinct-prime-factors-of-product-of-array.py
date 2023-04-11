@@ -1,4 +1,5 @@
-class Solution:              
+class Solution:          
+    
     def distinctPrimeFactors(self, nums: List[int]) -> int:
         factors = set()
         
@@ -11,6 +12,8 @@ class Solution:
                     n //= i
                     factors.add(i)
 
-                i += 1                        
+                i += 1
+            
+            factors = factors.union(current_factors)
         
         return len(factors)
