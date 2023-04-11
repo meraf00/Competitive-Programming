@@ -12,8 +12,6 @@ class Solution:
                     n //= i
                     factors.add(i)
 
-                i += 1
-            
-            factors = factors.union(current_factors)
+                i += 1                        
         
         return len(factors)
