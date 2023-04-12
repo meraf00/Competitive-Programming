@@ -25,9 +25,7 @@ class Solution:
                         
         
         def get_neighbours(node):
-            row, col = node
-            
-            neighbours = []
+            row, col = node                        
             
             for direction in directions:
                 y, x = direction
@@ -37,15 +35,13 @@ class Solution:
                 
                 if 0 <= new_row < rows and 0 <= new_col < cols:
                     if grid2[new_row][new_col] == 1:
-                        neighbours.append((new_row, new_col))
-            
-            return neighbours
+                        yield (new_row, new_col)
+                        
         
         counter = 0
         for row in range(rows):
             for col in range(cols):
-                if grid2[row][col] == 1:
-                    if dfs((row, col)):
-                        counter += 1                            
+                if grid2[row][col] == 1:            
+                        counter += dfs((row, col))                        
         
         return counter
