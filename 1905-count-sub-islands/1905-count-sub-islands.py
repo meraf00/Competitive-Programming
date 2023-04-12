@@ -18,14 +18,17 @@ class Solution:
             
             grid2[r][c] = 0 # mark as visited                        
             
-            for nbr in get_neighbours(node):                 
+            for nbr in get_neighbours(node): 
+                
                 is_subisland = dfs(nbr) and is_subisland
             
             return is_subisland
                         
         
         def get_neighbours(node):
-            row, col = node                        
+            row, col = node
+            
+            neighbours = []
             
             for direction in directions:
                 y, x = direction
@@ -35,13 +38,14 @@ class Solution:
                 
                 if 0 <= new_row < rows and 0 <= new_col < cols:
                     if grid2[new_row][new_col] == 1:
-                        yield (new_row, new_col)
-                        
+                        neighbours.append((new_row, new_col))
+            
+            return neighbours
         
         counter = 0
         for row in range(rows):
             for col in range(cols):
-                if grid2[row][col] == 1:            
-                        counter += dfs((row, col))                        
+                if grid2[row][col] == 1:                    
+                    counter += dfs((row, col))                        
         
         return counter
