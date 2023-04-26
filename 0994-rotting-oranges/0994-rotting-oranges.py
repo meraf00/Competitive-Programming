@@ -40,6 +40,8 @@ class Solution:
                 
                 for nbr in get_neigbours(current):                    
                     queue.append((nbr, level + 1))
+                    
+                    # mark as visited (rotten)
                     r, c = nbr
                     grid[r][c] = ROTTEN
             
