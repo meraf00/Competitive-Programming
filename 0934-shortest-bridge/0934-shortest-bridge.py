@@ -71,7 +71,7 @@ class Solution:
                     queue.append((nbr, distance + 1))
                 
                 if is_inbound(nbr) and grid[r][c] == 1:
-                    
+                    return distance
                     min_distance = min(min_distance, distance)
         
         
