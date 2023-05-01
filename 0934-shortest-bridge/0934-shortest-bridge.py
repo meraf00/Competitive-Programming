@@ -56,10 +56,7 @@ class Solution:
                     borders.add(current)
         
         
-        queue = deque(map(lambda coord: (coord, 0), borders))                
-        
-        
-        min_distance = float('inf')
+        queue = deque(map(lambda coord: (coord, 0), borders))                                        
         
         while queue:
             current, distance = queue.popleft()
@@ -71,11 +68,10 @@ class Solution:
                     queue.append((nbr, distance + 1))
                 
                 if is_inbound(nbr) and grid[r][c] == 1:
-                    return distance
-                    min_distance = min(min_distance, distance)
+                    return distance                    
         
         
-        return min_distance
+        
                     
         
                 
