@@ -46,9 +46,13 @@ class Solution:
                     neighbours.append((new_row, new_col))
             
             return neighbours
-                                                
+        
+        
+        # identify starting position from grid
+        # and give unique number for each key
         key_map = {}
         start_pos = None
+        
         for row in range(rows):
             for col in range(cols):
                 if is_key((row, col)):
@@ -57,13 +61,18 @@ class Solution:
                         key_map[key] = len(key_map)
                 elif grid[row][col] == "@":
                     start_pos = (row, col)
-                    
+        
+        
+        # target is having all keys
         target = 0
         
         for v in key_map.values():
             target = target | (1 << v)
                     
         
+        # a cell visited while posessing some key is not considered as
+        # visited if we reach it while not having that key in other interation
+        # visited = {keys: visited_nodes_while_having_keys}
         visited = defaultdict(set)
         
         visited[0].add(start_pos)
@@ -76,23 +85,30 @@ class Solution:
         while queue:
             current, keys, path_length = queue.popleft()
             
+            # we have all keys, record path_length
             if target == keys: 
                 min_distance = min(path_length, min_distance)
 
             
+            # nbr if next cell is not wall or
+            # we currently have key in our key set to open it
             for nbr in get_neighbours(current, keys):  
-
                 
+                # this nbr has not been visited while holding this set of keys
                 if nbr not in visited[keys]:
                     visited[keys].add(nbr)
                     
                     nbr_row, nbr_col = nbr
+                    
+                    # we found new key, add it to our set of keys
                     if is_key(nbr):                        
                         key = grid[nbr_row][nbr_col]
                         nbr_keys = keys | (1 << key_map[key])
+                    
+                    # next cell is empty cell, our keys remain the same
                     else:
                         nbr_keys = keys
-                    
+                                        
                     visited[nbr_keys].add(nbr)                    
                     queue.append((nbr, nbr_keys, path_length + 1))
                     
