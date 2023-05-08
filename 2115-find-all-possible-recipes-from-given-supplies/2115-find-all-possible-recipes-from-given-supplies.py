@@ -11,14 +11,7 @@ class Solution:
             
             indegree[recipe] = len(ingredients[idx])
                     
-        for supply in supplies:            
-            indegree[supply] = 0
-        
-        queue = deque()
-
-        for ing in indegree.keys():
-            if indegree[ing] == 0:
-                queue.append(ing)
+        queue = deque(supplies)
         
         makeable = set()
         
