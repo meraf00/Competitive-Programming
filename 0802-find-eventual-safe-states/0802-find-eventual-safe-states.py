@@ -4,8 +4,8 @@ class Solution:
         GRAY  = 1   # visited in current path 
         BLACK = 2   # visited in other path
         
-        
-        colors = [WHITE] * len(graph)
+        n_nodes = len(graph)
+        colors = [WHITE] * n_nodes
         
         def top_sort(node):               
             if colors[node] == GRAY:
@@ -26,8 +26,7 @@ class Solution:
                                     
         safe_nodes = []
         
-        for node, color in enumerate(colors):             
-
+        for node in range(n_nodes):
             if top_sort(node):                
                 safe_nodes.append(node)
         
