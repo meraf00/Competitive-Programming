@@ -1,22 +1,18 @@
+# https://codeforces.com/gym/442099/my
+
 from collections import *
 import sys
 
-directions = [
-    (-1, 0),
-    (1, 0),
-    (0, -1),
-    (0, 1),
-    (1, 1),
-    (-1, -1),
-    (1, -1),
-    (-1, 1)
-]
+sys.setrecursionlimit(1000000)
+
+directions = [(-1, 0), (1, 0), (0, -1), (0, 1)]
 
 
 ENTER = 0
 LEAVE = 1
 
-def get_neighbours(pos):    
+
+def get_neighbours(pos):
     row, col = pos
 
     nbrs = []
@@ -25,26 +21,25 @@ def get_neighbours(pos):
         new_row = row + dy
         new_col = col + dx
 
-        if 1 <= new_row <= rows and 1 <= new_col <= cols:
+        if 0 <= new_row < rows and 0 <= new_col < cols:
             if grid[new_row][new_col] == grid[row][col]:
                 nbrs.append((new_row, new_col))
-    
+
     return nbrs
 
 
-def has_cycle(curr):
-    r, c = curr
-
-    grid[r][c] = ENTER
+def has_cycle(curr, parent):
+    visited.add(curr)
 
     for nbr in get_neighbours(curr):
-        nbr_r, nbr_c = nbr
-        if grid[nbr_r][nbr_c] == ENTER or has_cycle(nbr) :
+        if nbr == parent:
+            continue
+
+        if nbr in visited or has_cycle(nbr, curr):
             return True
-    
-    grid[r][c] = LEAVE
-    
+
     return False
+
 
 rows, cols = map(int, input().split())
 
@@ -58,10 +53,8 @@ visited = set()
 for r in range(rows):
     for c in range(cols):
         if (r, c) not in visited:
-            if has_cycle((r, c)):
+            if has_cycle((r, c), None):
                 print("Yes")
                 sys.exit()
 
 print("No")
-
-
