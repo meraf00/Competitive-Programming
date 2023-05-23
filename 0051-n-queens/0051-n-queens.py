@@ -1,13 +1,5 @@
 class Solution:
-    def solveNQueens(self, n: int) -> List[List[str]]:
-        def hash(state):
-            n = 0
-            for num in state:
-                n *= 10
-                n += num
-            
-            return n
-        
+    def solveNQueens(self, n: int) -> List[List[str]]:        
         def valid_state(state):
             for i in range(n): 
                 x0, y0 = i, state[i]
@@ -53,14 +45,10 @@ class Solution:
                     
                     state[i] = init
                     taken.discard(j)
-            
-            
-            
-        
-        
+
         init_state = [0] * n
+        
         backtrack(init_state, 0, set(init_state))
-        
-        
+                
         return solutions
             
