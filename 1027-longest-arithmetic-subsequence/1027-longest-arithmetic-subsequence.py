@@ -2,11 +2,17 @@ class Solution:
     def longestArithSeqLength(self, nums: List[int]) -> int:
         
         # (index of last element of seq, diff) : length of seq
-        dp = {}
+        dp = defaultdict(lambda: 1)
+        
+        max_seq = 0
         
         for right in range(len(nums)):
             for left in range(right):
-                dp[(right, nums[right] - nums[left])] = dp.get((left, nums[right] - nums[left]), 1) + 1
+                diff = nums[right] -  nums[left]                
+                
+                dp[(right, diff)] = dp[(left, diff)] + 1
+                
+                max_seq = max(dp[(right, diff)], max_seq)
         
         
-        return max(dp.values())
+        return max_seq
