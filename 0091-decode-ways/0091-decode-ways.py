@@ -8,7 +8,7 @@ class Solution:
         dp[0] = dp[1] = 1
         
         for i in range(2, len(s) + 1):
-            if 1 <= int(s[i-1 : i]):
+            if int(s[i-1 : i]) != 0:
                 dp[i] += dp[i-1]
                 
             if 10 <= int(s[i-2:i]) <= 26:
