@@ -5,28 +5,40 @@ class Solution:
         
         target_node = (rows-1, cols-1)
         
-        priority_queue = [(grid[0][0], 0, 0)]
+        priority_queue = [(grid[0][0], (0, 0))]
         
         directions = [
             (0, 1),
             (1, 0),
             (-1, 0),
             (0, -1)
-        ]                  
+        ]
         
-        grid[0][0] = -1
         
-        while priority_queue:
-            cost, r, c = heappop(priority_queue)
-                        
-            if (r, c) == target_node:
-                return cost                                       
+        def get_neighbours(node):
+            row, col = node
+            
+            nbrs = []
             
             for dx, dy in directions:
-                nbr_r = r + dy
-                nbr_c = c + dx
-                if 0 <= nbr_r < rows and 0 <= nbr_c < cols:
-                    if grid[nbr_r][nbr_c] != -1:               
-                        heappush(priority_queue, (max(cost, grid[nbr_r][nbr_c]), nbr_r, nbr_c))
-                        grid[nbr_r][nbr_c] = -1
+                new_row = row + dy
+                new_col = col + dx
+                if 0 <= new_row < rows and 0 <= new_col < cols:
+                    if grid[new_row][new_col] != -1:
+                        nbrs.append((new_row, new_col))
                 
+            return nbrs                
+        
+        
+        while priority_queue:
+            cost, current_node = heappop(priority_queue)
+            
+            if current_node == target_node:
+                return cost       
+            
+            for nbr in get_neighbours(current_node):
+                r, c = nbr
+                weight = grid[r][c]
+                grid[r][c] = -1
+
+                heappush(priority_queue, (max(cost, weight), nbr))                        
