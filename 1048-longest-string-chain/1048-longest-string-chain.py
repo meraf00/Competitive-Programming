@@ -7,7 +7,7 @@ class Solution:
         words.sort(key=lambda word: len(word))
         
         for word in words:                            
-            for idx in range(len(word)):
+            for idx, _ in enumerate(word):                 
                 one_char_removed = word[:idx] + word[idx + 1:]                  
                 
                 chain_lengths[word] = max(
