@@ -1,20 +1,20 @@
 class Solution:
     def minAddToMakeValid(self, s: str) -> int:
-        stack = []
+        open_count = 0
         
-        counter = 0
+        addition_count = 0
         
         for char in s:
             if char == "(":
-                stack.append(0)
+                open_count += 1
             
-            elif stack:
-                stack.pop()
+            elif open_count > 0:
+                open_count -= 1
             
             else:
-                counter += 1
+                addition_count += 1
         
-        counter += len(stack)
+        addition_count += open_count
         
-        return counter
+        return addition_count
             
