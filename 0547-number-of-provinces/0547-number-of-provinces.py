@@ -1,39 +1,47 @@
-class Solution:
+class Solution:    
     def findCircleNum(self, isConnected: List[List[int]]) -> int:
-        graph = defaultdict(set)
+        n_cities = len(isConnected)
         
-        for row in range(len(isConnected)):
-            for col in range(len(isConnected[0])):
-                if row == col and row not in graph:
-                    graph[row] = set()
-                    
-                    
+        reps = {i:i for i in range(1, n_cities + 1)}
+        rank = {i:1 for i in range(1, n_cities + 1)}
+        
+        def find(city):            
+            root = city
+            while root != reps[root]:
+                root = reps[root]
+               
+            while city != root:
+                parent = reps[city]
+                reps[city] = root
+                city = parent
+                               
+            return root
+       
+        def union(x, y):
+            rep_x = find(x)
+            rep_y = find(y)
+            
+            if rep_x == rep_y:
+                return
+            
+            if rank[rep_x] >= rank[rep_y]:
+                reps[rep_y] = rep_x  
+                rank[rep_x] += rank[rep_y]
+                        
+            else:
+                reps[rep_x] = rep_y     
+                rank[rep_y] += rank[rep_x]
+            
+           
+        for row in range(n_cities):
+            for col in range(n_cities):
                 if isConnected[row][col]:
-                    graph[row].add(col)
-        
-        
-        visited = set()
-        
-        def dfs(node):
-            stack = [node]
-            
-            while stack:
-                current = stack.pop()
-                
-                visited.add(current)
-                
-                for nbr in graph[current]:
-                    if nbr not in visited:
-                        stack.append(nbr)
-                                
-        
-        provinces = 0
-        for node in graph:
-            if node not in visited:
-                dfs(node)
-                provinces += 1
-    
-        return provinces
-                
-            
+                    union(row + 1, col + 1)
                     
+        unique_reps = set()
+        
+        for city in reps.keys():
+            unique_reps.add(find(city))
+
+        return len(unique_reps)
+        
