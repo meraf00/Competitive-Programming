@@ -19,8 +19,7 @@ class Solution:
         for row in range(rows):
             for col in range(cols):
                 new_height = min(west[row], north[col])
-                change += new_height - grid[row][col]
-                grid[row][col] = new_height
+                change += new_height - grid[row][col]                
                         
         return change
         
