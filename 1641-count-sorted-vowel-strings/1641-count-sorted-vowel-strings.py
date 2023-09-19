@@ -1,28 +1,11 @@
 class Solution:
     def countVowelStrings(self, n: int) -> int:
-        vowels = ['a', 'e', 'i', 'o', 'u']
-                
-        current = []
-        counter = 0
+        dp = [[i for i in range(5, 0, -1)] for _ in range(n)]
         
-        def backtrack(length):
-            nonlocal counter
-            
-            if length == 0:
-                counter += 1
-                return
-            
-            for i in range(5):
-                if not current:
-                    current.append(vowels[i])
-                    backtrack(length - 1)
-                    current.pop()
-                
-                elif vowels[i] >= current[-1]:
-                    current.append(vowels[i])
-                    backtrack(length - 1)
-                    current.pop()
-                            
-        backtrack(n)
         
-        return counter
+        for i in range(1, n):
+            for j in range(3, -1, -1):
+                dp[i][j] = dp[i - 1][j] + dp[i][j + 1]
+
+                
+        return dp[n - 1][0]
