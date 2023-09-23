@@ -1,28 +1,46 @@
 class Solution:
-    def longestConsecutive(self, nums: List[int]) -> int:           
-        cons = {}
-        visited = set()
-        max_range = 0
+    def longestConsecutive(self, nums: List[int]) -> int:
+        if not nums:
+            return 0
         
-        for num in nums:    
-            if num in visited:
-                continue
-            visited.add(num)
-            
-            low = num
-            high = num
-            
-            if num + 1 in cons:
-                high = cons[num + 1][1]
-            
-            if num - 1 in cons:
-                low = cons[num - 1][0]
-            
-            cons[low] = [low, high]
-            cons[high] = [low, high]
-                        
+        reps = {i: i for i in nums}
+        rank = {i: 1 for i in nums}
                 
-            max_range = max(high - low + 1, max_range)
+        def find(member):
+            root = member
+            while root != reps[root]:
+                root = reps[root]
             
+            parent = member
+            while parent != root:
+                temp = reps[parent]
+                reps[parent] = root
+                parent = temp
             
-        return max_range                
+            return root
+        
+        
+        def union(x, y):
+            xRep = find(x)
+            yRep = find(y)
+            
+            if xRep == yRep:
+                return
+            
+            if rank[xRep] >= rank[yRep]:
+                reps[yRep] = xRep
+                rank[xRep] += rank[yRep]
+            
+            else:
+                reps[xRep] = yRep
+                rank[yRep] += rank[xRep]
+            
+                    
+        for num in nums:
+            if num - 1 in reps:
+                union(num, num - 1)
+        
+        
+        return max(rank.values())
+                
+        
