@@ -1,31 +1,34 @@
 class Solution:
     def checkInclusion(self, s1: str, s2: str) -> bool:
-        freq = Counter(s1)
+        if len(s1) > len(s2):
+            return False
+
+        freq1 = [0] * 26
+
+        freq2 = [0] * 26
+        
+        for char in s1:
+            asci = ord(char) - ord('a')
+            freq1[asci] += 1
+
+        for right in range(len(s1)):
+            asci = ord(s2[right]) - ord('a')
+            freq2[asci] += 1
+            
+        if freq1 == freq2:
+            return True
         
         left = 0
-                
-        window_size = len(s1)
-        
-        for right in range(len(s2)):
-            current_char = s2[right]
+        for right in range(len(s1), len(s2)):
+            asci_r = ord(s2[right]) - ord('a')            
+            asci_l = ord(s2[left]) - ord('a')            
             
-            if freq.get(current_char):
-                freq[current_char] -= 1
+            freq2[asci_r] += 1
+            freq2[asci_l] -= 1
             
-            elif current_char in freq:
-                while freq[current_char] == 0:
-                    freq[s2[left]] += 1
-                    left += 1
-                    
-                freq[current_char] -= 1
-            
-            else:
-                while left < right:
-                    freq[s2[left]] += 1
-                    left += 1
-                left += 1
-            
-            if window_size == right - left + 1:
+            if freq1 == freq2:
                 return True
+        
+            left += 1
         
         return False
