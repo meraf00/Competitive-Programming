@@ -1,18 +1,14 @@
 class Solution:
     def countOrders(self, n: int) -> int:
-        MODULO = 10 ** 9 + 7
+        mod = pow(10, 9) + 7
         
-        if n == 1:            
-            return 1
-    
-        pairs = n * 2
+        count = 1
         
-        arrangements = pairs - 1
-        
-        count = self.countOrders(n - 1)
-        
-        count = (count * pairs * arrangements) // 2        
-        
-        return count % MODULO
-        
-        
+        for i in range(n * 2 - 1, 0, -2):
+            ways_to_place_pi_di = i * (i + 1) // 2                        
+            
+            count *= ways_to_place_pi_di
+            
+            count %= mod
+            
+        return count
