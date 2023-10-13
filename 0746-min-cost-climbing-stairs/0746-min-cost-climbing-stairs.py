@@ -1,28 +1,14 @@
-class Solution:                
-    def minCostClimbingStairs(self, cost: List[int]) -> int:
+class Solution:
+    def minCostClimbingStairs(self, cost: List[int]) -> int:    
         cost.append(0)
         
-        computed = {0: cost[0], 1: cost[1]}
+        n = len(cost)
         
-        def dp(stair_idx):
-            if stair_idx in computed:
-                return computed[stair_idx]
-            
-            computed[stair_idx] = min(dp(stair_idx - 1), dp(stair_idx - 2)) + cost[stair_idx]
-            
-            return computed[stair_idx]
+        dp = [0] * (n + 1)
         
+        dp[1] = cost[0]
         
-        return dp(len(cost) - 1)
-        
-        
-        # return computed[len(cost) - 1]
-        
-        
-        
-        
-        
-        
-        
-        
-        
+        for i in range(2, n + 1):
+            dp[i] = min(dp[i - 1] + cost[i - 1], dp[i - 2] + cost[i - 1])
+                    
+        return dp[-1]
