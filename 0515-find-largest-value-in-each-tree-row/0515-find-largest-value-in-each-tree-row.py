@@ -9,32 +9,35 @@ class Solution:
         if not root:
             return []
         
-        
         queue = deque([(root, 0)])
         
-        level = defaultdict(lambda: float('-inf'))
+        max_value = defaultdict(lambda: float('-inf'))
         
-        max_depth = 0
+        max_level = 0
         
         while queue:
-            current, depth = queue.popleft()
+            node, level = queue.popleft()
             
-            level[depth] = max(level[depth], current.val)
+            max_value[level] = max(node.val, max_value[level])
             
-            max_depth = max(depth, max_depth)
+            max_level = max(max_level, level)
             
             
-            if current.left:
-                queue.append((current.left, depth + 1))
+            if node.left:
+                queue.append((node.left, level + 1))
             
-            if current.right:
-                queue.append((current.right, depth + 1))
+            if node.right:
+                queue.append((node.right, level + 1))
         
-        answer = [0] * (max_depth + 1)
         
-        for i in range(max_depth + 1):
-            answer[i] = level[i]
+        ans = []
         
-        return answer
+        for i in range(max_level + 1):
+            ans.append(max_value[i])
         
-                
+        return ans
+            
+        
+        
+        
+        
