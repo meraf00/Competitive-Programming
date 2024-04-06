@@ -4,42 +4,24 @@
 #         self.val = val
 #         self.left = left
 #         self.right = right
-class Solution:    
-    def sum_count_ave_count(self, root):
-        # returns (sum of all nodes in the sub tree,
-        #          number of nodes, 
-        #          num of all nodes that are equal to average of sub tree)
+class Solution:
+    def averageOfSubtree(self, root: TreeNode) -> int:
         
-        if not root:
-            return (0, 0, 0)
-        
-        if not root.left and not root.right:
-            return (root.val, 1, 1)
-        
-        
-        left_sum, left_count, left_averages = self.sum_count_ave_count(root.left)
-        
-        right_sum, right_count, right_averages = self.sum_count_ave_count(root.right)
-        
-        
-        num_of_nodes_in_sub_tree = left_count + right_count + 1
-        
-        sum_of_vals_in_sub_tree = left_sum + right_sum + root.val
-        
-        ave = sum_of_vals_in_sub_tree // num_of_nodes_in_sub_tree
-        
-        
-        if ave == root.val:
-            total_averages = left_averages + right_averages + 1
-        
-        else:
-            total_averages = left_averages + right_averages
+        def average_of_subtree(node):
+            if not node:
+                return 0, 0, 0
             
-        return (sum_of_vals_in_sub_tree, num_of_nodes_in_sub_tree, total_averages)
-                        
-    def averageOfSubtree(self, root: Optional[TreeNode]) -> int:
-        _, _, total_averages = self.sum_count_ave_count(root)
-        
-        return total_averages
-        
-        
+            left_count, left_sum, lc = average_of_subtree(node.left)
+            right_count, right_sum, rc = average_of_subtree(node.right)
+            
+            subtree_count = 1 + left_count + right_count
+            subtree_sum = node.val + left_sum + right_sum
+            
+            count = lc + rc
+            
+            if node.val == subtree_sum // subtree_count:
+                count += 1
+            
+            return subtree_count, subtree_sum, count
+    
+        return average_of_subtree(root)[-1]
