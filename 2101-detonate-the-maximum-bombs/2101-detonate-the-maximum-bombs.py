@@ -26,10 +26,13 @@ class Solution:
         for i in range(n):
             stack = [i]
             
-            visited = set()
+            visited = set()                        
             
             while stack:
                 node = stack.pop()
+                
+                if node in visited:
+                    continue
                 
                 visited.add(node)
                 
