@@ -17,7 +17,7 @@ class Solution:
                 
                 result = min(
                     dp(bitmask ^ (1 << i), k + 1) + (n ^ nums1[k]), 
-                    dp(bitmask, k + 1),
+                    # dp(bitmask, k + 1),
                     result)
                 
             
